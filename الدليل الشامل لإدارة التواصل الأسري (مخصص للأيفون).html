@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="التواصل الأسري">
+<title>الدليل الشامل لإدارة التواصل الأسري</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--rose:#f4d6d9;--rose-d:#c9737f;--rose-dd:#a24f5c;--cream:#fbf5ec;--paper:#fffdf9;--slate:#3d4756;--slate-l:#6b7686;--line:#e9dccf;--call:#b94a4a;--msg:#3f7d6b;--none:#8a93a0}
+*{box-sizing:border-box;margin:0;-webkit-tap-highlight-color:transparent}
+body{font-family:'Cairo',-apple-system,BlinkMacSystemFont,sans-serif;background:var(--cream);color:var(--slate);line-height:1.6;padding-bottom:calc(40px + env(safe-area-inset-bottom));padding-top:env(safe-area-inset-top)}
+.wrap{max-width:600px;margin:0 auto;padding:0 16px}
+header{background:linear-gradient(160deg,var(--rose),#f9e7dd);padding:24px 0 18px;border-bottom:1px solid var(--line);border-radius:0 0 20px 20px;box-shadow:0 4px 12px rgba(0,0,0,0.03)}
+h1{font-size:1.5rem;font-weight:900;color:var(--rose-dd);line-height:1.3}
+header p{color:var(--slate-l);font-size:.88rem;margin-top:2px}
+#nap{margin:14px 0 0;padding:10px 14px;border-radius:14px;font-weight:600;display:flex;gap:10px;align-items:center;background:var(--paper);border:1.5px solid var(--line);font-size:.9rem}
+#nap.on{background:#3d4756;color:#fff;border-color:#3d4756}
+#nap small{display:block;font-weight:400;opacity:.85;font-size:.8rem}
+nav{display:flex;gap:4px;margin:16px 0;background:var(--paper);padding:4px;border-radius:14px;border:1px solid var(--line)}
+nav button{flex:1;font:inherit;font-weight:700;padding:8px 4px;border:0;border-radius:10px;background:none;color:var(--slate-l);cursor:pointer;font-size:.85rem;transition:all 0.2s}
+nav button.act{background:var(--rose);color:var(--rose-dd);box-shadow:0 2px 6px rgba(0,0,0,0.05)}
+.panel{display:none}.panel.act{display:block}
+h2{font-size:1.1rem;margin:4px 0 10px;color:var(--slate)}
+.crumb{font-size:.82rem;color:var(--slate-l);margin-bottom:6px;min-height:1.4em}
+.grid{display:grid;grid-template-columns:1fr;gap:8px}
+@media(min-width:400px){.grid{grid-template-columns:1fr 1fr}}
+.opt{font:inherit;text-align:right;background:var(--paper);border:1.5px solid var(--line);border-radius:14px;padding:12px;cursor:pointer;color:var(--slate);font-weight:600;display:flex;justify-content:space-between;align-items:center;box-shadow:0 2px 4px rgba(0,0,0,0.02)}
+.opt:active{transform:scale(.98);background:#f5ece2}
+.opt .tag{font-size:1.2rem}
+.back{font:inherit;background:none;border:0;color:var(--rose-dd);font-weight:700;cursor:pointer;margin-bottom:6px;padding:4px 0;font-size:.9rem}
+.result{background:var(--paper);border-radius:18px;padding:20px;border:2px solid var(--line);text-align:center;box-shadow:0 4px 12px rgba(0,0,0,0.04)}
+.result.c{border-color:var(--call)}.result.m{border-color:var(--msg)}.result.n{border-color:var(--none)}
+.result .big{font-size:2.2rem}
+.result h3{font-size:1.2rem;margin:4px 0}
+.result p{color:var(--slate-l);margin-bottom:12px;font-size:.9rem}
+.cta{display:flex;align-items:center;justify-content:center;font:inherit;font-weight:700;text-decoration:none;color:#fff;padding:12px 20px;border-radius:12px;border:0;cursor:pointer;margin:6px 0;width:100%;box-shadow:0 3px 8px rgba(0,0,0,0.1)}
+.cta.c{background:var(--call)}.cta.m{background:var(--msg)}
+.warn{margin-top:12px;font-size:.85rem;background:#fdf0e3;border-radius:10px;padding:10px;color:#7a5530;text-align:right;line-height:1.5}
+.confirm{display:flex;gap:8px;align-items:center;justify-content:center;margin:10px 0;font-weight:600;background:#eef0f3;padding:10px;border-radius:10px;font-size:.85rem}
+.confirm input{width:18px;height:18px;accent-color:var(--call)}
+.search{width:100%;font:inherit;padding:10px 12px;border-radius:12px;border:1.5px solid var(--line);background:var(--paper);margin-bottom:10px;-webkit-appearance:none}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
+.chip{font:inherit;font-size:.8rem;padding:4px 10px;border-radius:99px;border:1.5px solid var(--line);background:var(--paper);cursor:pointer;color:var(--slate-l)}
+.chip.act{background:var(--slate);color:#fff;border-color:var(--slate)}
+.sec{margin-bottom:14px}
+.sec h3{font-size:.95rem;color:var(--rose-dd);margin-bottom:4px}
+.row{display:flex;justify-content:space-between;gap:10px;align-items:center;background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:10px 12px;margin-bottom:6px;font-size:.88rem}
+.badge{white-space:nowrap;font-size:.75rem;font-weight:700;padding:2px 8px;border-radius:99px;color:#fff}
+.badge.c{background:var(--call)}.badge.m{background:var(--msg)}.badge.n{background:var(--none)}
+.rule{background:var(--paper);border-right:4px solid var(--rose-d);border-radius:12px;padding:12px 14px;margin-bottom:8px;font-size:.88rem}
+.rule b{color:var(--rose-dd)}
+.legend{display:flex;gap:10px;flex-wrap:wrap;font-size:.82rem;margin-bottom:10px}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+  <h1>الدليل الشامل لإدارة التواصل الأسري</h1>
+  <p>دليل مروة السريع للتواصل اليومي</p>
+  <div id="nap" role="status"></div>
+</div></header>
+
+<main class="wrap">
+<nav role="tablist">
+  <button class="act" data-tab="wiz">مساعد القرار</button>
+  <button data-tab="dir">الدليل المرجعي</button>
+  <button data-tab="rules">القواعد</button>
+</nav>
+
+<section id="wiz" class="panel act">
+  <button class="back" id="back" hidden>← رجوع</button>
+  <div class="crumb" id="crumb"></div>
+  <h2 id="q"></h2>
+  <div id="stage"></div>
+</section>
+
+<section id="dir" class="panel">
+  <input class="search" id="search" type="search" placeholder="ابحثي عن موقف… (مثال: حفاظات، سائق)" aria-label="بحث">
+  <div class="chips" id="chips"></div>
+  <div id="list"></div>
+</section>
+
+<section id="rules" class="panel">
+  <div class="legend"><span>🚨 اتصال</span><span>✉️ رسالة</span><span>🔇 لا شيء</span></div>
+  <div class="rule"><b>الرسائل فقط عبر الواتساب.</b> لا تتصلي عبر الواتساب لتنبيهي برسالة؛ اتركِي الرسالة وسأرد فور فراغي.</div>
+  <div class="rule"><b>الاتصال للحالات العاجلة فقط.</b> الصحة، الطوارئ، والضيوف، والأمور المفاجئة.</div>
+  <div class="rule"><b>وقت الراحة: ٤:٠٠ عصراً حتى ٦:٠٠ مساءً.</b> لا اتصالات إلا للضرورة القصوى.</div>
+</section>
+</main>
+
+<script>
+const PHONE_INTL="966596951995";
+const NAP_START=16, NAP_END=18;
+const T={c:{icon:"🚨",label:"اتصال"},m:{icon:"✉️",label:"رسالة"},n:{icon:"🔇",label:"لا شيء"}};
+
+const DATA=[
+ {name:"الطلبات والمستلزمات والتوصيل",icon:"🛍️",subs:[
+  {name:"الملابس",items:[["ملابس متسخة للحالة الطارئة","c"],["شراء ملابس ضرورية للمدرسة أو للطلعة","m"],["ملابسي جاهزة أو غير جاهزة","m"],["ملابس في المغسلة","c"]]},
+  {name:"الأكل",items:[["حاجة لغداء من المطعم","m"],["السؤال إذا تغديت أم لا","m"],["جاهزية الأكل","c"],["السؤال عن نوع أكل معين","m"],["أداء غداء العيال","m"]]},
+  {name:"البقالة",items:[["حاجة ملحة للغداء","c"],["حاجة للعشاء","m"],["رغبة في حلوى أو عصير معين","m"]]},
+  {name:"الفاكهة والخضار",items:[["وجود ضيوف والحاجة لفاكهة معينة","c"],["تعطل طبخة بسبب فاكهة أو خضار معينة","c"],["رغبة في ملء سلة الفاكهة في الثلاجة","m"]]}]},
+ {name:"الأطفال",icon:"🧒",subs:[
+  {name:"سلمان",items:[["حاجة طبية ملحة كالحرارة","c"],["إعطاء مسكنات بدون فائدة","c"],["حالة طارئة كالسقوط","c"],["في حال عدم احتواء الموضوع","c"],["نفاذ الحفاظات أثناء الخروج","c"],["على وشك انتهاء الحفاظات","m"],["انقضاء الملابس أثناء الخروج","c"],["مقاس الملابس في المنزل","m"]]},
+  {name:"ناصر وطيف",items:[["فطور المدرسة","m"],["المذاكرة","m"],["المشاغبة الشديدة","n"],["المشاغبة العادية","m"],["مستلزمات قرطاسية أو مدرسية لأول مرة","m"],["مستلزم مادي طارئ","c"],["السؤال عن مذاكرة الأطفال","m"],["إنجازات الأطفال في المذاكرة","m"],["خروج ناصر وطيف للنزهة","c"],["مشكلة صحية في المدرسة","c"],["مشكلة لوجستية في المدرسة","c"],["إنجاز في المدرسة","m"],["رحلة مدرسية","m"]]}]},
+ {name:"السائق واللوجستيات",icon:"🚗",items:[["الرغبة في الخروج بموعد مسبق","c"],["عدم وجود تنسيق مسبق","m"],["حالة طارئة","c"],["موعد ولم يحضر السائق","c"],["السؤال عن السائق في حال الخروج العرضي","m"]]},
+ {name:"إداريات المنزل والصيانة",icon:"🔧",items:[["انقطاع كهرباء/ماء أو تسريب طارئ","c"],["وصول فني صيانة بموعد مسبق","c"],["بطء الواي فاي / أعطال الأجهزة غير العاجلة","m"],["طلبات الصيانة الدورية مستقبلاً","m"]]},
+ {name:"المناسبات والضيوف",icon:"🎉",items:[["ضيوف قادمون/وصلوا الآن","c"],["دعوة لزيارة أو مناسبة قادمة","m"],["تنسيق الخروج لبيت الأهل","m"]]}
+];
+
+const $=s=>document.querySelector(s);
+const pad=n=>String(n).padStart(2,"0");
+
+function inNap(){const h=new Date().getHours();return h>=NAP_START&&h<NAP_END}
+function updateNap(){
+  const d=new Date(),el=$("#nap"),on=inNap();
+  el.className=on?"on":"";
+  const hhmm=pad(d.getHours()%12||12)+":"+pad(d.getMinutes())+(d.getHours()>=12?" م":" ص");
+  if(on){
+    const mins=(NAP_END*60)-(d.getHours()*60+d.getMinutes());
+    el.innerHTML='<span style="font-size:1.4rem">😴</span><div>وقت الراحة الآن ('+hhmm+')<small>تفتح الاتصالات العادية بعد '+Math.floor(mins/60)+'س و'+mins%60+'د.</small></div>';
+  }else{
+    el.innerHTML='<span style="font-size:1.4rem">☀️</span><div>خارج وقت الراحة ('+hhmm+')<small>وقت الراحة اليومي: ٤:٠٠ – ٦:٠٠ مساءً.</small></div>';
+  }
+}
+updateNap();setInterval(updateNap,30000);
+
+document.querySelectorAll("nav button").forEach(b=>b.onclick=()=>{
+  document.querySelectorAll("nav button,.panel").forEach(x=>x.classList.remove("act"));
+  b.classList.add("act");$("#"+b.dataset.tab).classList.add("act");
+});
+
+let path=[];
+function waLink(sec,sub,item){
+  const txt="مرحباً، رسالة من مروة\nالقسم: "+(sub?sec+" ← "+sub:sec)+"\nالحالة: "+item+"\n";
+  return "https://wa.me/"+PHONE_INTL+"?text="+encodeURIComponent(txt);
+}
+function opt(label,tagHtml,fn){
+  const b=document.createElement("button");b.className="opt";
+  b.innerHTML='<span>'+label+'</span>'+(tagHtml?'<span class="tag">'+tagHtml+'</span>':'');b.onclick=fn;return b;
+}
+function renderWiz(){
+  const st=$("#stage");st.innerHTML="";
+  const main=path[0]!=null?DATA[path[0]]:null;
+  const sub=main&&main.subs&&path[1]!=null?main.subs[path[1]]:null;
+  $("#back").hidden=path.length===0;
+  $("#crumb").textContent=[main&&main.name,sub&&sub.name].filter(Boolean).join(" ‹ ");
+  const g=document.createElement("div");g.className="grid";
+  if(!main){
+    $("#q").textContent="ما نوع الموضوع؟";
+    DATA.forEach((d,i)=>g.append(opt(d.name,d.icon,()=>{path=[i];renderWiz()})));
+  }else if(main.subs&&!sub){
+    $("#q").textContent="أي قسم بالتحديد؟";
+    main.subs.forEach((s,i)=>g.append(opt(s.name,"",()=>{path=[path[0],i];renderWiz()})));
+  }else{
+    const items=(sub||main).items;
+    if(path.length===(main.subs?3:2)){showResult(main,sub,items[path[path.length-1]]);return}
+    $("#q").textContent="ما الحالة؟";
+    items.forEach((it,i)=>g.append(opt(it[0],T[it[1]].icon,()=>{path.push(i);renderWiz()})));
+  }
+  st.append(g);
+}
+function showResult(main,sub,item){
+  $("#q").textContent="";
+  const [text,type]=item,st=$("#stage");
+  const box=document.createElement("div");box.className="result "+type;
+  const nap=inNap();
+  let h='<div class="big">'+T[type].icon+'</div>';
+  if(type==="c"){
+    h+='<h3>اتصلي مباشرة</h3><p>'+text+'</p>';
+    if(nap){
+      h+='<div class="warn">⛔ الآن وقت الراحة. الاتصال مسموح للحالات الطارئة جداً فقط.</div>';
+      h+='<label class="confirm"><input type="checkbox" id="ok"> نعم، الحالة طارئة جداً</label>';
+      h+='<a class="cta c" id="callbtn" href="tel:+'+PHONE_INTL+'" style="opacity:0.4;pointer-events:none">📞 اتصال طارئ</a>';
+      h+='<a class="cta m" href="'+waLink(main.name,sub&&sub.name,text)+'">✉️ إرسال رسالة بدلاً</a>';
+    }else{
+      h+='<a class="cta c" href="tel:+'+PHONE_INTL+'">📞 اتصال مباشر</a>';
+    }
+  }else if(type==="m"){
+    h+='<h3>أرسلي رسالة واتساب</h3><p>'+text+'</p>';
+    h+='<a class="cta m" href="'+waLink(main.name,sub&&sub.name,text)+'">✉️ إرسال عبر الواتساب</a>';
+  }else{
+    h+='<h3>لا شيء، يُتجاوز الأمر</h3><p>'+text+'<br>لا حاجة للتواصل.</p>';
+  }
+  box.innerHTML=h;st.append(box);
+  const ok=box.querySelector("#ok"),cb=box.querySelector("#callbtn");
+  if(ok)ok.onchange=()=>{cb.style.opacity=ok.checked?"1":"0.4";cb.style.pointerEvents=ok.checked?"auto":"none"};
+}
+$("#back").onclick=()=>{path.pop();renderWiz()};
+renderWiz();
+
+let filter="all",q="";
+function flat(){
+  const out=[];
+  DATA.forEach((m,mi)=>{
+    if(m.subs)m.subs.forEach(s=>s.items.forEach(it=>out.push({sec:m.name,sub:s.name,text:it[0],type:it[1]})));
+    else m.items.forEach(it=>out.push({sec:m.name,sub:null,text:it[0],type:it[1]}));
+  });
+  return out;
+}
+const ALL=flat();
+function renderChips(){
+  const c=$("#chips");c.innerHTML="";
+  [["all","الكل"],["c","🚨 اتصال"],["m","✉️ رسالة"],["n","🔇 لا شيء"]].forEach(([k,l])=>{
+    const b=document.createElement("button");b.className="chip"+(filter===k?" act":"");b.textContent=l;
+    b.onclick=()=>{filter=k;renderChips();renderList()};c.append(b);
+  });
+}
+function renderList(){
+  const L=$("#list");L.innerHTML="";
+  const rows=ALL.filter(r=>(filter==="all"||r.type===filter)&&(!q||(r.text+r.sec+(r.sub||"")).includes(q)));
+  if(!rows.length){L.innerHTML='<div style="text-align:center;padding:20px;color:var(--slate-l)">لا توجد نتائج</div>';return}
+  let cur="";
+  rows.forEach(r=>{
+    const key=r.sub?r.sec+" ‹ "+r.sub:r.sec;
+    if(key!==cur){cur=key;const h=document.createElement("div");h.className="sec";h.innerHTML="<h3>"+key+"</h3>";L.append(h)}
+    const d=document.createElement("div");d.className="row";
+    d.innerHTML="<span>"+r.text+'</span><span class="badge '+r.type+'">'+T[r.type].icon+" "+T[r.type].label+"</span>";
+    L.append(d);
+  });
+}
+$("#search").oninput=e=>{q=e.target.value.trim();renderList()};
+renderChips();renderList();
+</script>
+</body>
+</html>
